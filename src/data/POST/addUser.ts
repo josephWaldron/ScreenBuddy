@@ -6,7 +6,7 @@ export default {
 
 //failed
 
-//   export default {
-//     "success": false,
-//     "message": "Error: User already exists",
-//   }
+// export default {
+//   "success": false,
+//   "message": "Error: User already exists",
+// }

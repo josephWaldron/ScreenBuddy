@@ -1,4 +1,4 @@
-import test_content from "../data/GET/content";
+import test_content from "../../data/GET/content";
 
 export interface Content {
   id: number;
@@ -7,7 +7,7 @@ export interface Content {
   img_url: string;
 }
 
-interface ContentResponse {
+export interface ContentArray {
   total: number;
   content: Content[];
 }
@@ -20,7 +20,8 @@ interface Props {
   page?: number;
 }
 
-const getContent = (props: Props) => {
+const getContent = (props: Props): ContentArray => {
+  //call backend to get content that matches the prop filters
   return test_content;
 };
 
