@@ -5,7 +5,12 @@ interface Props {
   content_id: number;
 }
 
-const deleteUserRatingHook = (props: Props) => {
+export interface res {
+  success: boolean;
+  message: string;
+}
+
+const deleteUserRatingHook = (props: Props): res => {
   //call backend to delete the rating based on props
   return deleteUserRating;
 };
