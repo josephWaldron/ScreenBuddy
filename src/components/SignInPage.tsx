@@ -9,6 +9,7 @@ const SignInPage = () => {
           layout: {
             socialButtonsVariant: "iconButton",
             socialButtonsPlacement: "bottom",
+            logoPlacement: "inside",
           },
         }}
         afterSignInUrl={"/profile"}

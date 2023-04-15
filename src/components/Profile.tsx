@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/react";
+import { Alert, Button } from "@chakra-ui/react";
 import { useClerk, useUser } from "@clerk/clerk-react";
 import React from "react";
 
@@ -10,6 +10,8 @@ const Profile = () => {
       location.href = "/";
     });
   };
+
+  if (!user) return <Alert status="error">You are not signed in</Alert>;
   return (
     <>
       <div>your profile {user?.username}</div>
