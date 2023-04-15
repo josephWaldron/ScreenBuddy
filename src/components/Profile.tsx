@@ -10,6 +10,7 @@ import {
 import { useClerk, useUser } from "@clerk/clerk-react";
 import React, { useState } from "react";
 import { MdIosShare, MdLogout } from "react-icons/md";
+import RenderContent from "./renderContent/RenderContent";
 
 const Profile = () => {
   const { user } = useUser();
@@ -66,6 +67,7 @@ const Profile = () => {
           Share
         </Button>
       </Tooltip>
+      <RenderContent />
     </>
   );
 };
