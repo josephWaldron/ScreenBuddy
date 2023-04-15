@@ -1,7 +1,23 @@
+import { Button } from "@chakra-ui/react";
+import { useClerk, useUser } from "@clerk/clerk-react";
 import React from "react";
 
 const Profile = () => {
-  return <div>Profile</div>;
+  const { user } = useUser();
+  const { signOut } = useClerk();
+  const handleSignOut = () => {
+    signOut().then(() => {
+      location.href = "/";
+    });
+  };
+  return (
+    <>
+      <div>your profile {user?.username}</div>
+      <Button colorScheme="red" onClick={handleSignOut}>
+        Sign Out
+      </Button>
+    </>
+  );
 };
 
 export default Profile;

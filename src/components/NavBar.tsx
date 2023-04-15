@@ -1,4 +1,10 @@
-import { SignInButton, SignOutButton, useUser } from "@clerk/clerk-react";
+import {
+  SignIn,
+  SignInButton,
+  SignOutButton,
+  useClerk,
+  useUser,
+} from "@clerk/clerk-react";
 import lightModeLogo from "../assets/ScreenBuddy-logos_black.png";
 import darkModeLogo from "../assets/ScreenBuddy-logos_white.png";
 import {
@@ -13,11 +19,12 @@ import {
 const NavBar = () => {
   const logo = useColorModeValue(lightModeLogo, darkModeLogo);
   const { user } = useUser();
+
   const handleProfile = () => {
-    if (!user) {
-      return;
-    }
-    location.href = `/${user.id}`;
+    location.href = `/profile`;
+  };
+  const handleSignIn = () => {
+    location.href = "/sign-in";
   };
   //console.log(user);
   return (
@@ -28,9 +35,16 @@ const NavBar = () => {
       <Spacer />
       <Text>ScreenBuddy</Text>
       <Spacer />
-      {!user && <SignInButton />}
-      {user && <Button onClick={handleProfile}>Profile</Button>}
-      {user && <SignOutButton />}
+      {user && (
+        <Button colorScheme="green" onClick={handleProfile}>
+          Profile
+        </Button>
+      )}
+      {!user && (
+        <Button colorScheme="blue" onClick={handleSignIn}>
+          Sign In
+        </Button>
+      )}
     </HStack>
   );
 };
