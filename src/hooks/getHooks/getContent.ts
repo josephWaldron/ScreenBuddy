@@ -1,4 +1,6 @@
+import { contentFilters } from "../../App";
 import test_content from "../../data/GET/content";
+import useAPI from "../useAPI";
 
 export interface Content {
   id: number;
@@ -12,17 +14,16 @@ export interface ContentArray {
   content: Content[];
 }
 
-interface Props {
-  user_id?: string;
-  category?: string;
-  filter?: string;
-  search?: string;
-  page?: number;
-}
+const getContent = (props: contentFilters) => {
+  const { data, error, isLoading } = useAPI({
+    type: "get",
+    route: "/content",
+    config: {
+      params: props,
+    },
+  });
 
-const getContent = (props: Props): ContentArray => {
-  //call backend to get content that matches the prop filters
-  return test_content;
+  return { data, error, isLoading };
 };
 
 export default getContent;
