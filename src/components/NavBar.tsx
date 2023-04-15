@@ -1,10 +1,4 @@
-import {
-  SignIn,
-  SignInButton,
-  SignOutButton,
-  useClerk,
-  useUser,
-} from "@clerk/clerk-react";
+import { useUser } from "@clerk/clerk-react";
 import lightModeLogo from "../assets/ScreenBuddy-logos_black.png";
 import darkModeLogo from "../assets/ScreenBuddy-logos_white.png";
 import {
@@ -15,6 +9,7 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { MdPerson, MdLogin } from "react-icons/md";
 
 const NavBar = () => {
   const logo = useColorModeValue(lightModeLogo, darkModeLogo);
@@ -36,12 +31,20 @@ const NavBar = () => {
       <Text>ScreenBuddy</Text>
       <Spacer />
       {user && (
-        <Button colorScheme="green" onClick={handleProfile}>
+        <Button
+          rightIcon={<MdPerson />}
+          colorScheme="green"
+          onClick={handleProfile}
+        >
           Profile
         </Button>
       )}
       {!user && (
-        <Button colorScheme="blue" onClick={handleSignIn}>
+        <Button
+          rightIcon={<MdLogin />}
+          colorScheme="blue"
+          onClick={handleSignIn}
+        >
           Sign In
         </Button>
       )}

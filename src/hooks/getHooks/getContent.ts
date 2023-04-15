@@ -1,4 +1,4 @@
-import { contentFilters } from "../../App";
+import { contentFilters } from "../../components/renderContent/RenderContent";
 import test_content from "../../data/GET/content";
 import useAPI from "../useAPI";
 
@@ -24,6 +24,7 @@ const getContent = (props: contentFilters) => {
   });
 
   return { data, error, isLoading };
+  //return test_content;
 };
 
 export default getContent;

@@ -8,23 +8,12 @@ import SignInPage from "./components/SignInPage";
 import { dark } from "@clerk/themes";
 import { useColorModeValue } from "@chakra-ui/react";
 import Profile from "./components/Profile";
-
-export interface contentFilters {
-  user_id?: string;
-  category?: string;
-  filter?: string;
-  search?: string;
-  page?: number;
-}
+import RenderContent from "./components/renderContent/RenderContent";
 
 const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 function App() {
-  // const { data, error, isLoading } = getContent({});
-  // console.log(data);
+
   const users = getAllUserIds();
-  const [contentFilters, setContentFilters] = useState<contentFilters>(
-    {} as contentFilters
-  );
 
   return (
     <>
@@ -37,14 +26,14 @@ function App() {
         <NavBar />
         <Routes>
           {/* Create a route for each user ID */}
-          <Route path="/" element={<div>home</div>} />
+          <Route path="/" element={<RenderContent />} />
           <Route path="/sign-in" element={<SignInPage />} />
           <Route path="/profile" element={<Profile />} />
           {users.map((userIdMap) => (
             <Route
               key={userIdMap}
               path={`/${userIdMap}`}
-              element={<h1>{userIdMap} profile</h1>}
+              element={<RenderContent user_id={userIdMap} />}
             ></Route>
           ))}
         </Routes>
