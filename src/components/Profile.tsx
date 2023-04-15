@@ -1,4 +1,12 @@
-import { Alert, Button, Tooltip } from "@chakra-ui/react";
+import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
+  Button,
+  Tooltip,
+  useToast,
+} from "@chakra-ui/react";
 import { useClerk, useUser } from "@clerk/clerk-react";
 import React, { useState } from "react";
 import { MdIosShare, MdLogout } from "react-icons/md";
@@ -6,20 +14,39 @@ import { MdIosShare, MdLogout } from "react-icons/md";
 const Profile = () => {
   const { user } = useUser();
   const { signOut } = useClerk();
-  const [clicked, setClicked] = useState(false); // add state variable
+  const [clicked, setClicked] = useState(false);
+  const toast = useToast();
   const handleSignOut = () => {
     signOut().then(() => {
       location.href = "/";
     });
   };
 
-  if (!user) return <Alert status="error">You are not signed in</Alert>;
+  if (!user)
+    return (
+      <Alert status="error">
+        <AlertIcon />
+        <AlertTitle>You are not logged in!</AlertTitle>
+        <AlertDescription>
+          Please sign in to view your profile.
+        </AlertDescription>
+      </Alert>
+    );
 
   const handleShare = () => {
     const url = `${location.origin}/${user.id}`;
     navigator.clipboard.writeText(url);
     setClicked(true); // update state when button is clicked
+
+    toast({
+      title: "Profile copied!",
+      description: "Share it with your friends!",
+      status: "success",
+      duration: 3000,
+      isClosable: false,
+    });
   };
+
   return (
     <>
       <div>your profile {user?.username}</div>
