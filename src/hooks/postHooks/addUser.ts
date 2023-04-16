@@ -1,14 +1,20 @@
-import addUserRes from "../../data/POST/addUser";
-import { res } from "../deleteHooks/deleteUserRating";
+import useAPI from "../useAPI";
 
 interface Props {
   user_id: string;
-  user_name: string;
+  username: string;
 }
 
-const addUser = (props: Props): res => {
-  //call backend to add user based on props
-  return addUserRes;
+const addUser = (props: Props) => {
+  const { data, error, isLoading } = useAPI({
+    type: "post",
+    route: "/addUser",
+    config: {
+      user_id: props.user_id,
+      username: props.username,
+    },
+  });
+  return { data, error, isLoading };
 };
 
 export default addUser;

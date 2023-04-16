@@ -8,7 +8,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useClerk, useUser } from "@clerk/clerk-react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { MdIosShare, MdLogout } from "react-icons/md";
 import RenderContent from "./renderContent/RenderContent";
 
@@ -22,7 +22,6 @@ const Profile = () => {
       location.href = "/";
     });
   };
-
   if (!user)
     return (
       <Alert status="error">

@@ -1,11 +1,10 @@
 import backendClient from "../services/backendClient";
 import { useState, useEffect } from "react";
-import { AxiosRequestConfig } from "axios";
 
 interface Props {
   type: "get" | "post" | "put" | "delete";
   route: string;
-  config?: AxiosRequestConfig; //object of data to send to backend
+  config?: {}; //object of data to send to backend
 }
 
 const useAPI = (props: Props) => {
