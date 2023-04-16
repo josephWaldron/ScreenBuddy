@@ -5,13 +5,13 @@ import { AxiosRequestConfig } from "axios";
 interface Props {
   type: "get" | "post" | "put" | "delete";
   route: string;
-  config: AxiosRequestConfig; //object of data to send to backend
+  config?: AxiosRequestConfig; //object of data to send to backend
 }
 
 const useAPI = (props: Props) => {
   const [data, setData] = useState<any>(null);
   const [error, setError] = useState<string>("");
-  const [isLoading, setLoading] = useState<boolean>(false);
+  const [isLoading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const controller = new AbortController();

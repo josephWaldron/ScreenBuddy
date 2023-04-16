@@ -16,8 +16,8 @@ const RenderContent = (props: Props) => {
   const [contentFilters, setContentFilters] = useState<contentFilters>(
     {} as contentFilters
   );
-  const { data, error, isLoading } = getContent(contentFilters);
-  console.log(data);
+  // const { data, error, isLoading } = getContent(contentFilters);
+  // console.log(data);
   return (
     <>
       {props.user_id && <div>Content for user {props.user_id}</div>}

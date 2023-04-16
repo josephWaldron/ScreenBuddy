@@ -12,8 +12,10 @@ import RenderContent from "./components/renderContent/RenderContent";
 
 const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 function App() {
-
   const users = getAllUserIds();
+
+  console.log(users.isLoading);
+  console.log(users.data);
 
   return (
     <>
@@ -29,13 +31,15 @@ function App() {
           <Route path="/" element={<RenderContent />} />
           <Route path="/sign-in" element={<SignInPage />} />
           <Route path="/profile" element={<Profile />} />
-          {users.map((userIdMap) => (
-            <Route
-              key={userIdMap}
-              path={`/${userIdMap}`}
-              element={<RenderContent user_id={userIdMap} />}
-            ></Route>
-          ))}
+
+          {!users.isLoading &&
+            users.data.map((userIdMap: string) => (
+              <Route
+                key={userIdMap}
+                path={`/${userIdMap}`}
+                element={<RenderContent user_id={userIdMap} />}
+              ></Route>
+            ))}
         </Routes>
       </ClerkProvider>
     </>

@@ -28,7 +28,10 @@ const NavBar = () => {
         <Image src={logo} boxSize="100px" />
       </a>
       <Spacer />
-      <Text>ScreenBuddy</Text>
+
+      <a href="/">
+        <Text>ScreenBuddy</Text>
+      </a>
       <Spacer />
       {user && (
         <Button
