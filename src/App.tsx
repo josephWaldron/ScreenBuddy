@@ -12,7 +12,6 @@ import SignUpPage from "./components/SignUpPage";
 const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 function App() {
   const users = getAllUserIds();
-  console.log(users.data);
   return (
     <>
       <ClerkProvider

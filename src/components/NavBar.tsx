@@ -19,7 +19,7 @@ const NavBar = () => {
     location.href = `/profile`;
   };
   const handleSignIn = () => {
-    location.href = "/sign-in";
+    location.href = "/sign-up";
   };
 
   return (
