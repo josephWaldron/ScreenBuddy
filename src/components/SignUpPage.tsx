@@ -1,9 +1,9 @@
-import { SignIn } from "@clerk/clerk-react";
+import { SignUp } from "@clerk/clerk-react";
 import { Center } from "@chakra-ui/react";
-const SignInPage = () => {
+const SignUpPage = () => {
   return (
     <Center>
-      <SignIn
+      <SignUp
         appearance={{
           layout: {
             socialButtonsVariant: "iconButton",
@@ -12,10 +12,10 @@ const SignInPage = () => {
           },
         }}
         afterSignInUrl={"/profile"}
-        signUpUrl="/sign-up"
+        signInUrl="/sign-in"
       />
     </Center>
   );
 };
 
-export default SignInPage;
+export default SignUpPage;

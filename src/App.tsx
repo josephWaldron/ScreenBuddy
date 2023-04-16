@@ -7,6 +7,7 @@ import { dark } from "@clerk/themes";
 
 import Profile from "./components/Profile";
 import RenderContent from "./components/renderContent/RenderContent";
+import SignUpPage from "./components/SignUpPage";
 
 const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 function App() {
@@ -24,7 +25,9 @@ function App() {
         <Routes>
           <Route path="/" element={<RenderContent />} />
           <Route path="/sign-in" element={<SignInPage />} />
+          <Route path="/sign-up" element={<SignUpPage />} />
           <Route path="/profile" element={<Profile users={users.data} />} />
+
           {!users.isLoading &&
             users.data.map((userIdMap: string) => (
               <Route
