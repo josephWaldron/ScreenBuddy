@@ -13,10 +13,6 @@ import RenderContent from "./components/renderContent/RenderContent";
 const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 function App() {
   const users = getAllUserIds();
-
-  console.log(users.isLoading);
-  console.log(users.data);
-
   return (
     <>
       <ClerkProvider
