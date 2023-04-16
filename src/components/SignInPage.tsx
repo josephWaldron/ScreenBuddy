@@ -12,7 +12,6 @@ const SignInPage = () => {
           },
         }}
         afterSignInUrl={"/profile"}
-        signUpUrl={"/sign-up"}
       />
     </Center>
   );

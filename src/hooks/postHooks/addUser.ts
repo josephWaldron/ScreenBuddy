@@ -5,7 +5,7 @@ interface Props {
   username: string;
 }
 
-const addUser = (props: Props) => {
+const addUser = async (props: Props) => {
   const { data, error, isLoading } = useAPI({
     type: "post",
     route: "/addUser",

@@ -9,7 +9,7 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { MdPerson, MdLogin } from "react-icons/md";
+import { MdPerson, MdLogin, MdPersonAddAlt1 } from "react-icons/md";
 
 const NavBar = () => {
   const logo = useColorModeValue(lightModeLogo, darkModeLogo);
@@ -21,7 +21,7 @@ const NavBar = () => {
   const handleSignIn = () => {
     location.href = "/sign-in";
   };
-  //console.log(user);
+
   return (
     <HStack padding="10px">
       <a href="/">

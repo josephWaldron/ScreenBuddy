@@ -11,8 +11,13 @@ import { useClerk, useUser } from "@clerk/clerk-react";
 import { useState } from "react";
 import { MdIosShare, MdLogout } from "react-icons/md";
 import RenderContent from "./renderContent/RenderContent";
+import addUser from "../hooks/postHooks/addUser";
 
-const Profile = () => {
+interface Props {
+  users: string[] | undefined;
+}
+
+const Profile = (props: Props) => {
   const { user } = useUser();
   const { signOut } = useClerk();
   const [clicked, setClicked] = useState(false);
@@ -32,6 +37,17 @@ const Profile = () => {
         </AlertDescription>
       </Alert>
     );
+  //check if the user is in the users array if it doesnt add user info to the database
+  if (!props.users?.includes(user.id)) {
+    console.log("user is in the database");
+    if (user.username) {
+      const username: string = user.username;
+      addUser({
+        user_id: user.id,
+        username: username,
+      });
+    }
+  }
 
   const handleShare = () => {
     const url = `${location.origin}/${user.id}`;
