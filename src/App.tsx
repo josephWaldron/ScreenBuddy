@@ -1,14 +1,13 @@
-import { ClerkProvider, SignIn, useUser } from "@clerk/clerk-react";
+import { ClerkProvider } from "@clerk/clerk-react";
 import NavBar from "./components/NavBar";
-import { useEffect, useState } from "react";
-import getContent from "./hooks/getHooks/getContent";
 import getAllUserIds from "./hooks/getHooks/getAllUserIds";
-import { Route, Routes, useParams } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import SignInPage from "./components/SignInPage";
 import { dark } from "@clerk/themes";
-import { useColorModeValue } from "@chakra-ui/react";
+
 import Profile from "./components/Profile";
 import RenderContent from "./components/renderContent/RenderContent";
+import SignUpPage from "./components/SignUpPage";
 
 const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 function App() {
@@ -23,11 +22,10 @@ function App() {
       >
         <NavBar />
         <Routes>
-          {/* Create a route for each user ID */}
           <Route path="/" element={<RenderContent />} />
           <Route path="/sign-in" element={<SignInPage />} />
+          <Route path="/sign-up" element={<SignUpPage />} />
           <Route path="/profile" element={<Profile />} />
-
           {!users.isLoading &&
             users.data.map((userIdMap: string) => (
               <Route
