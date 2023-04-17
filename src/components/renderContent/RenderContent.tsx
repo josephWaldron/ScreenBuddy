@@ -5,7 +5,7 @@ export interface contentFilters {
   category?: string;
   filter?: string;
   search?: string;
-  page?: number;
+  page?: number; //need to make an API call to see how many pages there should be might not use this TBH
 }
 
 interface Props {
