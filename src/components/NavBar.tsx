@@ -23,9 +23,9 @@ const NavBar = () => {
   };
 
   return (
-    <HStack padding="10px">
+    <HStack padding={2}>
       <a href="/">
-        <Image src={logo} boxSize="100px" />
+        <Image src={logo} height={50} />
       </a>
       <Spacer />
 
