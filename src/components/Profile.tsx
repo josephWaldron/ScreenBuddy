@@ -3,8 +3,13 @@ import {
   AlertDescription,
   AlertIcon,
   AlertTitle,
+  Box,
   Button,
+  Center,
+  Flex,
   HStack,
+  Spacer,
+  Text,
 } from "@chakra-ui/react";
 import { useClerk, useUser } from "@clerk/clerk-react";
 import { MdLogout } from "react-icons/md";
@@ -35,8 +40,8 @@ const Profile = (props: Props) => {
 
   return (
     <>
-      <div>your profile {user?.username}</div>
-      <HStack>
+      <HStack padding={2}>
+        <Spacer />
         <Button
           colorScheme="red"
           onClick={handleSignOut}

@@ -27,7 +27,7 @@ function App() {
             <NavBar />
           </Box>
           <Routes>
-            <Route path="/" element={<RenderContent />} />
+            <Route path="/" element={<RenderContent user_id="home" />} />
             <Route path="/sign-in" element={<SignInPage />} />
             <Route path="/sign-up" element={<SignUpPage />} />
             <Route path="/profile" element={<Profile users={users.data} />} />
