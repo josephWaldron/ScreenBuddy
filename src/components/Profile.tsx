@@ -4,12 +4,10 @@ import {
   AlertIcon,
   AlertTitle,
   Button,
-  Tooltip,
-  useToast,
+  HStack,
 } from "@chakra-ui/react";
 import { useClerk, useUser } from "@clerk/clerk-react";
-import { useState } from "react";
-import { MdIosShare, MdLogout } from "react-icons/md";
+import { MdLogout } from "react-icons/md";
 import RenderContent from "./renderContent/RenderContent";
 
 interface Props {
@@ -19,8 +17,6 @@ interface Props {
 const Profile = (props: Props) => {
   const { user } = useUser();
   const { signOut } = useClerk();
-  const [clicked, setClicked] = useState(false);
-  const toast = useToast();
   const handleSignOut = () => {
     signOut().then(() => {
       location.href = "/";
@@ -37,40 +33,19 @@ const Profile = (props: Props) => {
       </Alert>
     );
 
-  const handleShare = () => {
-    const url = `${location.origin}/${user.id}`;
-    navigator.clipboard.writeText(url);
-    setClicked(true); // update state when button is clicked
-
-    toast({
-      title: "Profile copied!",
-      description: "Share it with your friends!",
-      status: "success",
-      duration: 3000,
-      isClosable: false,
-    });
-  };
-
   return (
     <>
       <div>your profile {user?.username}</div>
-      <Button
-        colorScheme="red"
-        onClick={handleSignOut}
-        rightIcon={<MdLogout />}
-      >
-        Sign Out
-      </Button>
-      <Tooltip label="Copy profile link to clipboard">
+      <HStack>
         <Button
-          leftIcon={<MdIosShare />}
-          colorScheme={clicked ? "green" : "gray"} // change color scheme based on state
-          onClick={handleShare}
+          colorScheme="red"
+          onClick={handleSignOut}
+          rightIcon={<MdLogout />}
         >
-          Share
+          Sign Out
         </Button>
-      </Tooltip>
-      <RenderContent />
+      </HStack>
+      <RenderContent user_id={user.id} />
     </>
   );
 };

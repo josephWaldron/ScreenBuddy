@@ -26,26 +26,21 @@ function App() {
           <Box bgColor={"gray.900"}>
             <NavBar />
           </Box>
-          <Box flex="1">
-            <Routes>
-              <Route path="/" element={<RenderContent home={true} />} />
-              <Route path="/sign-in" element={<SignInPage />} />
-              <Route path="/sign-up" element={<SignUpPage />} />
-              <Route path="/profile" element={<Profile users={users.data} />} />
+          <Routes>
+            <Route path="/" element={<RenderContent />} />
+            <Route path="/sign-in" element={<SignInPage />} />
+            <Route path="/sign-up" element={<SignUpPage />} />
+            <Route path="/profile" element={<Profile users={users.data} />} />
 
-              {!users.isLoading &&
-                users.data.map((userIdMap: string) => (
-                  <Route
-                    key={userIdMap}
-                    path={`/${userIdMap}`}
-                    element={<RenderContent user_id={userIdMap} />}
-                  ></Route>
-                ))}
-            </Routes>
-          </Box>
-          <Box as="footer" mt="auto" bgColor={"gray.900"}>
-            <Footer />
-          </Box>
+            {!users.isLoading &&
+              users.data.map((userIdMap: string) => (
+                <Route
+                  key={userIdMap}
+                  path={`/${userIdMap}`}
+                  element={<RenderContent user_id={userIdMap} />}
+                ></Route>
+              ))}
+          </Routes>
         </ClerkProvider>
       </Flex>
     </>
