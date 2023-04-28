@@ -1,5 +1,6 @@
 import backendClient from "../services/backendClient";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import useDeepCompareEffect from "./useDeepCompareEffect"; // Import the custom hook
 
 interface Props {
   type: "get" | "post" | "put" | "delete";
@@ -12,7 +13,8 @@ const useAPI = (props: Props) => {
   const [error, setError] = useState<string>("");
   const [isLoading, setLoading] = useState<boolean>(true);
 
-  useEffect(() => {
+  useDeepCompareEffect(() => {
+    // Replace useEffect with useDeepCompareEffect
     const controller = new AbortController();
     setLoading(true);
     const { type, route, config } = props;
@@ -45,7 +47,7 @@ const useAPI = (props: Props) => {
         setLoading(false);
       });
     return () => controller.abort();
-  }, []);
+  }, [props.type, props.route, props.config]); // Remove JSON.stringify
 
   return { data, error, isLoading };
 };

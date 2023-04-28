@@ -1,36 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import getContent from "../../hooks/getHooks/getContent";
 import { Box, HStack, Spacer, VStack, Text, Center } from "@chakra-ui/react";
 import Footer from "./Footer";
-import getAllUserNames from "../../hooks/getHooks/getUserName";
 import getUser from "../../hooks/getHooks/getUserName";
+import ContentGrid from "./ContentGrid";
+import Filters from "./Filters";
 export interface contentFilters {
   user_id?: string; //if user_id is not provided get all content
-  category: string; //if category is not provided get all content catagories
-  title: string; //if title is not provided get all content
-  filter: string; //filter can be rating, date, or abc ascending or descending
+  content_type?: string;
+  title?: string; //if title is not provided get all content
+  filter: string;
 }
 
 interface Props {
-  user_id: string | "home";
+  user_id: string;
 }
 
 const RenderContent = ({ user_id }: Props) => {
   const [contentFilters, setContentFilters] = useState<contentFilters>({
     user_id: user_id,
-    category: "all",
-    title: "",
-    filter: "date_asc",
+    filter: "updated_at DESC",
   });
-  const user = getUser({ user_id });
-  const userName = user.data?.username;
-  if (user.isLoading)
+  const { data: userData, isLoading: userIsLoading } = getUser({ user_id });
+  const userName = userData?.username;
+  const { data: contentData, isLoading: contentIsLoading } =
+    getContent(contentFilters);
+  console.log(contentData);
+  if (userIsLoading)
     return (
       <Center>
         <Text fontSize={"4xl"}>Loading...</Text>
       </Center>
     );
-
   return (
     <>
       <Box flex="1">
@@ -39,12 +40,21 @@ const RenderContent = ({ user_id }: Props) => {
             <Text fontSize={"3xl"}>{userName}'s Profile</Text>
           </Center>
         ) : (
-          <Center>
-            <Text fontSize={"3xl"}>All Content</Text>
-          </Center>
+          <div></div>
         )}
-        <div>filter Tabs</div>
-        <div>Content Grid</div>
+        <Filters
+          selectedFilter={contentFilters.filter}
+          onFilter={(selectedFilter) =>
+            setContentFilters({ ...contentFilters, filter: selectedFilter })
+          }
+          onSearch={(searchText) => {
+            setContentFilters({ ...contentFilters, title: searchText });
+          }}
+          onSelectType={(type) =>
+            setContentFilters({ ...contentFilters, content_type: type })
+          }
+        />
+        <ContentGrid />
       </Box>
       <Footer user_id={user_id} />
     </>

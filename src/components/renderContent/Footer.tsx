@@ -1,6 +1,6 @@
 import { Button, HStack, Spacer, Tooltip, useToast } from "@chakra-ui/react";
 import { useUser } from "@clerk/clerk-react";
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { MdIosShare, MdKeyboardArrowUp } from "react-icons/md";
 
 interface Props {
@@ -10,7 +10,6 @@ interface Props {
 const Footer = ({ user_id }: Props) => {
   const toast = useToast();
   const { user } = useUser();
-
   const handleShare = () => {
     if (!user_id) {
       const url = `${location.origin}/`;

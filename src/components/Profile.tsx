@@ -20,13 +20,20 @@ interface Props {
 }
 
 const Profile = (props: Props) => {
-  const { user } = useUser();
+  const { user, isLoaded } = useUser();
   const { signOut } = useClerk();
   const handleSignOut = () => {
     signOut().then(() => {
       location.href = "/";
     });
   };
+  if (!isLoaded)
+    return (
+      <Center>
+        <Text fontSize="3xl">Loading...</Text>
+      </Center>
+    );
+
   if (!user)
     return (
       <Alert status="error">

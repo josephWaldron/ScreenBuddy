@@ -1,5 +1,4 @@
 import { contentFilters } from "../../components/renderContent/RenderContent";
-import test_content from "../../data/GET/content";
 import useAPI from "../useAPI";
 
 export interface Content {
@@ -14,17 +13,17 @@ export interface ContentArray {
   content: Content[];
 }
 
-const getContent = (props: contentFilters) => {
-  const { data, error, isLoading } = useAPI({
-    type: "get",
-    route: "/content",
+const getContent = (filters: contentFilters) => {
+  return useAPI({
+    type: "post",
+    route: "/getContent",
     config: {
-      params: props,
+      user_id: filters.user_id,
+      content_type: filters.content_type,
+      title: filters.title,
+      filter: filters.filter,
     },
   });
-
-  return { data, error, isLoading };
-  //return test_content;
 };
 
 export default getContent;
