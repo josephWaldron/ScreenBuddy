@@ -30,8 +30,6 @@ const ContentCard = ({ content }: Props) => {
           display="-webkit-box"
           overflow="hidden"
           textOverflow="ellipsis"
-          WebkitLineClamp={2}
-          WebkitBoxOrient="vertical"
         >
           {content.title}
         </Heading>
