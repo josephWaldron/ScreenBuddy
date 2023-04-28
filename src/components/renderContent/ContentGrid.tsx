@@ -1,7 +1,7 @@
 import React from "react";
 import { contentFilters } from "./RenderContent";
 import getContent from "../../hooks/getHooks/getContent";
-import { Center, Grid, SimpleGrid, Text } from "@chakra-ui/react";
+import { Box, Center, Grid, SimpleGrid, Text } from "@chakra-ui/react";
 import CardSkeleton from "./contentCards/CardSkeleton";
 import CardContainer from "./contentCards/CardContainer";
 import ContentCard from "./contentCards/ContentCard";
@@ -26,7 +26,7 @@ const ContentGrid = ({ isLoading, contentArray, user_id }: Props) => {
   if (!contentArray && isLoading)
     return (
       <SimpleGrid
-        columns={{ base: 2, sm: 2, md: 4, lg: 8 }}
+        columns={{ base: 2, sm: 2, md: 3, lg: 4, xl: 6, "2xl": 10 }}
         spacing={2}
         padding={2}
       >
@@ -38,19 +38,22 @@ const ContentGrid = ({ isLoading, contentArray, user_id }: Props) => {
           ))}
       </SimpleGrid>
     );
-  
+
   return (
-    <SimpleGrid
-      columns={{ base: 2, sm: 2, md: 4, lg: 8 }}
-      spacing={2}
-      padding={2}
-    >
-      {contentArray.map((content) => (
-        <CardContainer key={content.id}>
-          <ContentCard content={content} />
-        </CardContainer>
-      ))}
-    </SimpleGrid>
+    <>
+      <SimpleGrid
+        columns={{ base: 2, sm: 2, md: 3, lg: 4, xl: 6, "2xl": 10 }}
+        spacing={2}
+        padding={2}
+      >
+        {contentArray.map((content) => (
+          <CardContainer key={content.id}>
+            <ContentCard content={content} />
+          </CardContainer>
+        ))}
+      </SimpleGrid>
+      <Box height={20}></Box>
+    </>
   );
 };
 

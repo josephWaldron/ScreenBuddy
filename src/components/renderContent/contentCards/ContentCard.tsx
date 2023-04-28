@@ -1,5 +1,5 @@
 import { Content } from "../ContentGrid";
-import { Box, Card, CardBody, Heading, Image, Text } from "@chakra-ui/react";
+import { Box, Card, Flex, Heading, Image, Text } from "@chakra-ui/react";
 
 interface Props {
   content: Content;
@@ -7,26 +7,39 @@ interface Props {
 
 const ContentCard = ({ content }: Props) => {
   return (
-    <Card
-      width={{ base: "200px", md: "220px" }}
-      height={{ base: "400px", md: "450px" }}
-      alignItems="center"
-      justifyContent="center"
-    >
-      <Image src={content.image_url} alt={content.title} objectFit="contain" />
-      <CardBody>
-        <Heading fontSize={18} paddingBottom={2}>
+    <Card>
+      <Flex
+        alignItems="center"
+        justifyContent="center"
+        direction="column"
+        height="100%"
+      >
+        <Image
+          src={content.image_url}
+          alt={content.title}
+          objectFit="contain"
+          mb={4}
+        />
+        <Heading
+          fontSize={18}
+          textAlign="center"
+          height="3.6rem"
+          paddingBottom={2}
+          isTruncated
+          whiteSpace="normal"
+          display="-webkit-box"
+          overflow="hidden"
+          textOverflow="ellipsis"
+          WebkitLineClamp={2}
+          WebkitBoxOrient="vertical"
+        >
           {content.title}
         </Heading>
-        <Box
-          position="absolute"
-          bottom={3}
-          left="50%"
-          transform="translateX(-50%)"
-        >
+        <Flex flexGrow={1} />
+        <Box mb={3} textAlign="center">
           <Text>{content.rating}</Text>
         </Box>
-      </CardBody>
+      </Flex>
     </Card>
   );
 };
