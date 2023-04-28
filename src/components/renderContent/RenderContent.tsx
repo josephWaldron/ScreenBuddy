@@ -32,6 +32,15 @@ const RenderContent = ({ user_id }: Props) => {
         <Text fontSize={"4xl"}>Loading...</Text>
       </Center>
     );
+  if (!contentData && !contentIsLoading)
+    return (
+      <Box flex="1">
+        <Center>
+          <Text fontSize={"4xl"}>No Content Found</Text>
+        </Center>
+        <Footer user_id={user_id} />
+      </Box>
+    );
   return (
     <>
       <Box flex="1">
@@ -54,7 +63,11 @@ const RenderContent = ({ user_id }: Props) => {
             setContentFilters({ ...contentFilters, content_type: type })
           }
         />
-        <ContentGrid />
+        <ContentGrid
+          isLoading={contentIsLoading}
+          contentArray={contentData}
+          user_id={user_id}
+        />
       </Box>
       <Footer user_id={user_id} />
     </>
