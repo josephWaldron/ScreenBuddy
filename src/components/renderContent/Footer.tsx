@@ -1,3 +1,4 @@
+import { AddIcon, ChevronUpIcon, CopyIcon } from "@chakra-ui/icons";
 import { Button, HStack, Spacer, Tooltip, useToast } from "@chakra-ui/react";
 import { useUser } from "@clerk/clerk-react";
 import { useEffect } from "react";
@@ -68,7 +69,7 @@ const Footer = ({ user_id }: Props) => {
       <HStack padding={2}>
         <Tooltip label="Copy link to clipboard">
           <Button
-            leftIcon={<MdIosShare />}
+            leftIcon={<CopyIcon />}
             colorScheme={"blue"} // change color scheme based on state
             onClick={handleShare}
           >
@@ -77,7 +78,12 @@ const Footer = ({ user_id }: Props) => {
         </Tooltip>
         <Spacer />
         {user ? (
-          <Button size={"lg"} colorScheme="green" onClick={handleAdd}>
+          <Button
+            rightIcon={<AddIcon />}
+            size={"lg"}
+            colorScheme="green"
+            onClick={handleAdd}
+          >
             Add Content
           </Button>
         ) : (
@@ -92,7 +98,7 @@ const Footer = ({ user_id }: Props) => {
         <Spacer />
 
         <Button
-          rightIcon={<MdKeyboardArrowUp />}
+          rightIcon={<ChevronUpIcon />}
           onClick={handleScrollTop}
           colorScheme="blue"
         >

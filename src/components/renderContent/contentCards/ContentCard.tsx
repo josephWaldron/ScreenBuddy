@@ -19,6 +19,8 @@ import { GrAdd } from "react-icons/gr";
 import { useUser } from "@clerk/clerk-react";
 import { useEffect, useState } from "react";
 import AddContentModal from "./CRUD/AddContentModal";
+import EditContentModal from "./CRUD/EditContentModal";
+import { AddIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
 
 interface Props {
   content: Content;
@@ -29,15 +31,22 @@ const ContentCard = ({ content, user_id }: Props) => {
   const [canAdd, setCanAdd] = useState<boolean>(false);
   const [canEditDelete, setCanEditDelete] = useState<boolean>(false);
   const { user } = useUser();
+  //this if for the modals
   const [isAddContentModalOpen, setIsAddContentModalOpen] = useState(false);
-
   const openAddContentModal = () => {
     setIsAddContentModalOpen(true);
   };
-
   const closeAddContentModal = () => {
     setIsAddContentModalOpen(false);
   };
+  const [isEditContentModalOpen, setIsEditContentModalOpen] = useState(false);
+  const openEditContentModal = () => {
+    setIsEditContentModalOpen(true);
+  };
+  const closeEditContentModal = () => {
+    setIsEditContentModalOpen(false);
+  };
+
   useEffect(() => {
     if (user) {
       setCanAdd(true);
@@ -51,6 +60,14 @@ const ContentCard = ({ content, user_id }: Props) => {
         isOpen={isAddContentModalOpen}
         onClose={closeAddContentModal}
         content={content}
+      />
+      <EditContentModal
+        isOpen={isEditContentModalOpen}
+        onClose={closeEditContentModal}
+        content={content}
+        onRatingUpdated={(newRating) => {
+          content.rating = newRating;
+        }}
       />
 
       <Popover placement="auto">
@@ -98,7 +115,7 @@ const ContentCard = ({ content, user_id }: Props) => {
           </Card>
         </PopoverTrigger>
         <Portal>
-          <PopoverContent maxW="200px">
+          <PopoverContent maxW="124px">
             <PopoverArrow />
             <PopoverBody>
               <Tooltip
@@ -112,7 +129,7 @@ const ContentCard = ({ content, user_id }: Props) => {
               >
                 <Button
                   colorScheme="green"
-                  leftIcon={<GrAdd />}
+                  rightIcon={<AddIcon />}
                   mb={2}
                   width="100%"
                   size={"sm"}
@@ -135,11 +152,12 @@ const ContentCard = ({ content, user_id }: Props) => {
               >
                 <Button
                   colorScheme="yellow"
-                  leftIcon={<MdEdit />}
+                  rightIcon={<EditIcon />}
                   mb={2}
                   width="100%"
                   size={"sm"}
                   isDisabled={!canEditDelete}
+                  onClick={openEditContentModal}
                 >
                   Edit
                 </Button>
@@ -157,7 +175,7 @@ const ContentCard = ({ content, user_id }: Props) => {
               >
                 <Button
                   colorScheme="red"
-                  leftIcon={<MdDelete />}
+                  rightIcon={<DeleteIcon />}
                   width="100%"
                   size={"sm"}
                   isDisabled={!canEditDelete}

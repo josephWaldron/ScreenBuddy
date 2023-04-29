@@ -18,47 +18,56 @@ import {
   FormControl,
   Input,
 } from "@chakra-ui/react";
-
 import { Content } from "../../ContentGrid";
 import { useUser } from "@clerk/clerk-react";
-import addUserRating from "../../../../hooks/postHooks/addUserRating";
+import updateUserRating from "../../../../hooks/putHooks/updateUserRating";
+import { EditIcon } from "@chakra-ui/icons";
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
   content: Content;
+  onRatingUpdated: (newRating: number) => void;
 }
 
-const AddContentModal = ({ isOpen, onClose, content }: Props) => {
+const EditContentModal = ({
+  onRatingUpdated,
+  isOpen,
+  onClose,
+  content,
+}: Props) => {
   const [rating, setRating] = useState<number>(0);
   const { user } = useUser();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const toast = useToast();
+  const isRatingSame = content.rating === rating;
+  const tooltipLabel = isRatingSame
+    ? "New rating must be different"
+    : !rating
+    ? "Please select a new rating before editing"
+    : "Edit your rating";
 
   const handleSubmission = async (content: Content, user_rating: number) => {
     if (user) {
       setIsLoading(true);
       try {
-        const res = await addUserRating({
+        const res = await updateUserRating({
           user_id: user.id,
           content_id: content.id,
-          title: content.title,
-          image_url: content.image_url,
-          content_type: content.content_type,
-          rating: content.rating,
-          user_rating: user_rating,
+          rating: rating,
         });
         setIsLoading(false);
         toast({
-          title: "Rating added to your list!",
-          description: `${content.title} has been added to your list with a rating of ${user_rating} / 10 🍿`,
-          status: "success",
+          title: "Rating edited!",
+          description: `${content.title}'s rating is now ${user_rating} / 10 🍿`,
+          status: "warning",
           duration: 5000,
           isClosable: true,
           position: "top",
         });
+        onRatingUpdated(rating); // Pass the new rating
         onClose();
       } catch (error) {
         setIsLoading(false);
@@ -80,7 +89,7 @@ const AddContentModal = ({ isOpen, onClose, content }: Props) => {
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Add {content.title} to Your List</ModalHeader>
+        <ModalHeader>Edit {content.title}'s Rating</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Image
@@ -91,8 +100,13 @@ const AddContentModal = ({ isOpen, onClose, content }: Props) => {
             borderRadius={10}
           />
           <Center>
+            <Text fontSize="xl" fontWeight="bold" textColor={"red"}>
+              Old Rating {content.rating} / 10 🍿
+            </Text>
+          </Center>
+          <Center>
             <Text fontSize="xl" fontWeight="bold">
-              Your Rating {rating} / 10 🍿
+              New Rating {rating} / 10 🍿
             </Text>
           </Center>
           <Flex justifyContent="center" alignItems="center" marginBottom={4}>
@@ -112,18 +126,12 @@ const AddContentModal = ({ isOpen, onClose, content }: Props) => {
           </Flex>
         </ModalBody>
         <ModalFooter>
-          <Tooltip
-            label={
-              rating
-                ? "Add to Your List"
-                : "Please select a rating before adding to your list"
-            }
-            placement="top"
-          >
+          <Tooltip label={tooltipLabel} placement="top">
             <Button
-              colorScheme="green"
-              isDisabled={!rating}
+              colorScheme="yellow"
+              isDisabled={!rating || isRatingSame}
               width={150}
+              leftIcon={<EditIcon />}
               onClick={() => {
                 handleSubmission(content, rating as number);
               }}
@@ -132,7 +140,7 @@ const AddContentModal = ({ isOpen, onClose, content }: Props) => {
               {isLoading ? (
                 <Spinner size="sm" color="white" mr={2} />
               ) : (
-                "Add to List"
+                "Edit Rating"
               )}
             </Button>
           </Tooltip>
@@ -146,4 +154,4 @@ const AddContentModal = ({ isOpen, onClose, content }: Props) => {
   );
 };
 
-export default AddContentModal;
+export default EditContentModal;
