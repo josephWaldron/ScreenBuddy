@@ -1,14 +1,13 @@
 import {
   Box,
   Center,
-  HStack,
   Input,
   InputGroup,
   InputLeftElement,
   Text,
   VStack,
 } from "@chakra-ui/react";
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import ContentGrid from "../ContentGrid";
 import { BsSearch } from "react-icons/bs";
 import useTMDBSearch from "../../../hooks/getHooks/useTMDBSearch ";

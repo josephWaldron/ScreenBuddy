@@ -3,14 +3,11 @@ import {
   AlertDescription,
   AlertIcon,
   AlertTitle,
-  Box,
   Button,
   Center,
-  Flex,
   HStack,
   Spacer,
   Spinner,
-  Text,
 } from "@chakra-ui/react";
 import { useClerk, useUser } from "@clerk/clerk-react";
 import { MdLogout } from "react-icons/md";

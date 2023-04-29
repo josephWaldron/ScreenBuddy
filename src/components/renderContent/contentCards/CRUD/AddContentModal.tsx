@@ -10,7 +10,6 @@ import {
   Button,
   Image,
   Flex,
-  Box,
   Text,
   Center,
   Tooltip,
@@ -18,15 +17,7 @@ import {
   useToast,
   FormControl,
   Input,
-  FormLabel,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
-  IconButton,
 } from "@chakra-ui/react";
-import { ChevronUpIcon, ChevronDownIcon } from "@chakra-ui/icons";
 
 import { Content } from "../../ContentGrid";
 import { useUser } from "@clerk/clerk-react";

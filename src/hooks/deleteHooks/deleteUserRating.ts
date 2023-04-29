@@ -1,5 +1,3 @@
-import deleteUserRating from "../../data/DELETE/deleteUserRating";
-
 interface Props {
   user_id: string;
   content_id: number;
@@ -10,9 +8,9 @@ export interface res {
   message: string;
 }
 
-const deleteUserRatingHook = (props: Props): res => {
+const deleteUserRatingHook = (props: Props) => {
   //call backend to delete the rating based on props
-  return deleteUserRating;
+  return "success";
 };
 
 export default deleteUserRatingHook;
