@@ -66,7 +66,7 @@ const NavBar = () => {
       </Menu>
 
       <a href="/">
-        <Image src={logo} width={50} marginLeft={10} />
+        <Image src={logo} width={50} marginLeft={5} />
       </a>
       <Spacer />
 
