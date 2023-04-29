@@ -53,7 +53,7 @@ const ContentCard = ({ content, user_id }: Props) => {
         content={content}
       />
 
-      <Popover placement="right">
+      <Popover placement="auto">
         <PopoverTrigger>
           <Card
             position="relative"
