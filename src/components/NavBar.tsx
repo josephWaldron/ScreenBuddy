@@ -73,27 +73,27 @@ const NavBar = () => {
             <Text fontSize={"3xl"}>ScreenBuddy BETA</Text>
           </a>
           <Spacer />
-          {user && (
-            <Button
-              width={100}
-              rightIcon={<MdPerson />}
-              colorScheme="green"
-              onClick={handleProfile}
-            >
-              Profile
-            </Button>
-          )}
-          {!user && (
-            <Button
-              width={100}
-              rightIcon={<MdLogin />}
-              colorScheme="blue"
-              onClick={handleSignIn}
-            >
-              Sign In
-            </Button>
-          )}
         </>
+      )}
+      {user && (
+        <Button
+          width={100}
+          rightIcon={<MdPerson />}
+          colorScheme="green"
+          onClick={handleProfile}
+        >
+          Profile
+        </Button>
+      )}
+      {!user && (
+        <Button
+          width={100}
+          rightIcon={<MdLogin />}
+          colorScheme="blue"
+          onClick={handleSignIn}
+        >
+          Sign In
+        </Button>
       )}
     </Flex>
   );
