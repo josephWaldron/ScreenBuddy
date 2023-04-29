@@ -11,6 +11,7 @@ import {
   Center,
   Grid,
   GridItem,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { FaGithub } from "react-icons/fa";
 import zack from "../assets/Zack.png";
@@ -142,6 +143,7 @@ const About = () => {
       role: "Backend",
     },
   ];
+  const StackComponent = useBreakpointValue({ base: VStack, md: HStack });
 
   return (
     <VStack padding={10}>
@@ -161,12 +163,13 @@ const About = () => {
       <br />
       <Box p={6} borderWidth="1px" borderRadius="lg">
         <Heading mb={6}>About the Developers</Heading>
-        <HStack spacing={2}>
+        <StackComponent spacing={10}>
           {developers.map((dev, index) => (
             <DeveloperCard key={index} {...dev} />
           ))}
-        </HStack>
+        </StackComponent>
       </Box>
+
       <Box p={6} borderWidth="1px" borderRadius="lg" width={400}>
         <TechnologiesGrid technologies={technologies} />
       </Box>

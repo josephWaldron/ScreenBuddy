@@ -1,8 +1,16 @@
-import { Box, SimpleGrid, Center, Text, Tooltip } from "@chakra-ui/react";
+import {
+  Box,
+  SimpleGrid,
+  Center,
+  Text,
+  Tooltip,
+  Button,
+  VStack,
+} from "@chakra-ui/react";
 import CardSkeleton from "./contentCards/CardSkeleton";
 import CardContainer from "./contentCards/CardContainer";
 import ContentCard from "./contentCards/ContentCard";
-import { QuestionOutlineIcon } from "@chakra-ui/icons";
+import { AddIcon, QuestionOutlineIcon } from "@chakra-ui/icons";
 
 export interface Content {
   id: number;
@@ -16,7 +24,11 @@ interface Props {
   isLoading?: boolean;
   contentArray: Content[];
   user_id?: string;
+  
 }
+const handleAdd = () => {
+  location.href = "/add";
+};
 
 const ContentGrid = ({ isLoading, contentArray, user_id }: Props) => {
   const skeletons = [
@@ -36,6 +48,22 @@ const ContentGrid = ({ isLoading, contentArray, user_id }: Props) => {
             </CardContainer>
           ))}
       </SimpleGrid>
+    );
+  if (contentArray.length == 0 && !isLoading)
+    return (
+      <VStack>
+        <Text fontSize="2xl" fontWeight="bold" color="white">
+          No results found.
+        </Text>
+        <Button
+          rightIcon={<AddIcon />}
+          size={"lg"}
+          colorScheme="green"
+          onClick={handleAdd}
+        >
+          Add Content
+        </Button>
+      </VStack>
     );
 
   return (

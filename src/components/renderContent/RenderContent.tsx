@@ -47,13 +47,13 @@ const RenderContent = ({ user_id }: Props) => {
             <Text fontSize={"3xl"}>{userName}'s Profile</Text>
           </Center>
         ) : (
-          <div></div>
+          <Center>
+            <Text fontSize={"3xl"}>Our User's Database</Text>
+          </Center>
         )}
         <Filters
           selectedFilter={
-            contentFilters.filter !== undefined
-              ? contentFilters.filter
-              : ""
+            contentFilters.filter !== undefined ? contentFilters.filter : ""
           }
           onFilter={(selectedFilter) =>
             setContentFilters({ ...contentFilters, filter: selectedFilter })
