@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Content } from "../../components/renderContent/ContentGrid";
 
 export interface ApiContent {
   id: number;
@@ -12,13 +13,6 @@ export interface ApiContent {
 
 interface ApiResponse {
   results: ApiContent[];
-}
-
-export interface Content {
-  id: number;
-  title: string;
-  rating: number;
-  image_url: string;
 }
 
 const api_key = import.meta.env.VITE_TMDB_API_KEY;
@@ -42,15 +36,17 @@ const useSearch = (searchText: string) => {
         const apiResults = response.data.results;
 
         const searchResults = apiResults.map((apiResult) => {
-          let title, rating, image_url;
+          let title, rating, image_url, content_type;
 
           if (apiResult.media_type === "movie") {
+            content_type = "movie";
             title = apiResult.title;
             rating = apiResult.vote_average;
             image_url = apiResult.poster_path
               ? `https://image.tmdb.org/t/p/w500${apiResult.poster_path}`
               : "";
           } else if (apiResult.media_type === "tv") {
+            content_type = "tv";
             title = apiResult.name;
             rating = apiResult.vote_average;
             image_url = apiResult.poster_path
@@ -63,6 +59,7 @@ const useSearch = (searchText: string) => {
 
           return {
             id: apiResult.id,
+            content_type,
             title,
             rating,
             image_url,

@@ -1,5 +1,4 @@
-import addUserRatingTemp from "../../data/POST/addUserRating";
-import { res } from "../deleteHooks/deleteUserRating";
+import backendClient from "../../services/backendClient";
 
 interface Props {
   user_id: string;
@@ -19,9 +18,25 @@ const addUserRating = ({
   content_type,
   rating,
   user_rating,
-}: Props): res => {
-  //call backend to add the rating based on props
-  return addUserRatingTemp;
+}: Props) => {
+  return new Promise((resolve, reject) => {
+    backendClient
+      .post("addUserRating", {
+        user_id,
+        content_id,
+        title,
+        image_url,
+        content_type,
+        rating,
+        user_rating,
+      })
+      .then((res) => {
+        resolve(res.data);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
 };
 
 export default addUserRating;

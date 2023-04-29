@@ -8,6 +8,7 @@ export interface Content {
   title: string;
   rating: number;
   image_url: string;
+  content_type: string;
 }
 
 interface Props {

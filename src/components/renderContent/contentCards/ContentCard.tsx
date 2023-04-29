@@ -6,19 +6,14 @@ import {
   Heading,
   Button,
   Image,
-  Text,
   Popover,
   PopoverTrigger,
   PopoverContent,
-  PopoverHeader,
-  PopoverCloseButton,
   PopoverBody,
   Portal,
   Tooltip,
   PopoverArrow,
 } from "@chakra-ui/react";
-import Stars from "./Stars";
-import { BsThreeDotsVertical } from "react-icons/bs";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { GrAdd } from "react-icons/gr";
 import { useUser } from "@clerk/clerk-react";
@@ -97,7 +92,7 @@ const ContentCard = ({ content, user_id }: Props) => {
               </Heading>
               <Flex flexGrow={1} />
               <Box mb={3} textAlign="center">
-                <Stars rating={content.rating} />
+                {content.rating} / 10 🍿
               </Box>
             </Flex>
           </Card>

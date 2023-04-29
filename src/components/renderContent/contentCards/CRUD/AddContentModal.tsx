@@ -14,10 +14,15 @@ import {
   Text,
   Center,
   Tooltip,
+  Spinner,
+  useToast,
+  FormControl,
+  Input,
+  FormLabel,
 } from "@chakra-ui/react";
 import { Content } from "../../ContentGrid";
-import { BsStar, BsStarFill } from "react-icons/bs";
 import { useUser } from "@clerk/clerk-react";
+import addUserRating from "../../../../hooks/postHooks/addUserRating";
 
 interface Props {
   isOpen: boolean;
@@ -29,44 +34,50 @@ const AddContentModal = ({ isOpen, onClose, content }: Props) => {
   const [rating, setRating] = useState<number | null>(null);
   const [hover, setHover] = useState<number | null>(null);
   const { user } = useUser();
-  const handleSubmission = (content: Content, user_rating: number) => {
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const toast = useToast();
+
+  const handleSubmission = async (content: Content, user_rating: number) => {
     if (user) {
-      console.log("user_id: ", user.id);
-      console.log("content: ", content);
-      console.log("rating: ", user_rating);
+      setIsLoading(true);
+      console.log("type ", content.content_type);
+      try {
+        const res = await addUserRating({
+          user_id: user.id,
+          content_id: content.id,
+          title: content.title,
+          image_url: content.image_url,
+          content_type: content.content_type,
+          rating: content.rating,
+          user_rating: user_rating,
+        });
+        setIsLoading(false);
+        console.log("User rating added successfully", res);
+        toast({
+          title: "Rating added",
+          status: "success",
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+        });
+        onClose();
+      } catch (error) {
+        setIsLoading(false);
+        console.error(error);
+      }
     }
   };
 
-  const stars = [1, 2, 3, 4, 5].map((starValue) => {
-    const isFilled = starValue <= ((hover ?? rating) as number);
-
-    const handleClick = () => {
-      setRating(starValue);
-    };
-
-    const handleMouseOver = () => {
-      setHover(starValue);
-    };
-
-    const handleMouseLeave = () => {
-      setHover(null);
-    };
-
-    return (
-      <Box
-        as="span"
-        key={starValue}
-        onClick={handleClick}
-        onMouseOver={handleMouseOver}
-        onMouseLeave={handleMouseLeave}
-        color={isFilled ? "gold" : "gray.400"}
-        fontSize="2em"
-        cursor="pointer" // Add this line
-      >
-        {isFilled ? <BsStarFill /> : <BsStar />}
-      </Box>
-    );
-  });
+  const handleRatingChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseFloat(event.target.value);
+    if (!isNaN(value) && value >= 0 && value <= 10) {
+      setRating(value);
+    } else {
+      setRating(null);
+    }
+  };
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -84,11 +95,23 @@ const AddContentModal = ({ isOpen, onClose, content }: Props) => {
           />
           <Center>
             <Text fontSize="xl" fontWeight="bold">
-              Your Rating
+              Your Rating {rating}/ 10 🍿
             </Text>
           </Center>
           <Flex justifyContent="center" alignItems="center" marginBottom={4}>
-            {stars}
+            <FormControl>
+              <FormLabel htmlFor="rating">Enter a rating (0-10) 🍿</FormLabel>
+              <Input
+                type="number"
+                id="rating"
+                name="rating"
+                step="0.1"
+                min="0"
+                max="10"
+                value={rating ?? ""}
+                onChange={handleRatingChange}
+              />
+            </FormControl>
           </Flex>
         </ModalBody>
         <ModalFooter>
@@ -103,13 +126,17 @@ const AddContentModal = ({ isOpen, onClose, content }: Props) => {
             <Button
               colorScheme="green"
               isDisabled={!rating}
+              width={150}
               onClick={() => {
                 handleSubmission(content, rating as number);
-                onClose();
               }}
               style={{ marginRight: "10px" }}
             >
-              Add to List
+              {isLoading ? (
+                <Spinner size="sm" color="white" mr={2} />
+              ) : (
+                "Add to List"
+              )}
             </Button>
           </Tooltip>
 
