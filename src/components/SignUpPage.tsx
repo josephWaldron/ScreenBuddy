@@ -11,7 +11,7 @@ const SignUpPage = () => {
             logoPlacement: "inside",
           },
         }}
-        afterSignInUrl={"/profile"}
+        afterSignInUrl={"/"}
         signInUrl="/sign-in"
       />
     </Center>

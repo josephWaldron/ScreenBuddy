@@ -14,7 +14,6 @@ import {
   MenuList,
   MenuItem,
   IconButton,
-  useBreakpointValue,
 } from "@chakra-ui/react";
 import { MdPerson, MdLogin, MdMenu } from "react-icons/md";
 
@@ -56,10 +55,10 @@ const NavBar = () => {
           <MenuItem as="a" href="/">
             Home
           </MenuItem>
-          <MenuItem as="a" href="/">
-            About
+          <MenuItem as="a" href="/about">
+            About / Contact
           </MenuItem>
-          <MenuItem as="a" href="/">
+          <MenuItem as="a" href="/reportIssue">
             Report Issue
           </MenuItem>
         </MenuList>

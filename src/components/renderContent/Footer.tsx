@@ -2,7 +2,6 @@ import { AddIcon, ChevronUpIcon, CopyIcon } from "@chakra-ui/icons";
 import { Button, HStack, Spacer, Tooltip, useToast } from "@chakra-ui/react";
 import { useUser } from "@clerk/clerk-react";
 import { useEffect } from "react";
-import { MdIosShare, MdKeyboardArrowUp } from "react-icons/md";
 
 interface Props {
   user_id?: string | undefined;

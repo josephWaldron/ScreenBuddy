@@ -9,6 +9,8 @@ import RenderContent from "./components/renderContent/RenderContent";
 import SignUpPage from "./components/SignUpPage";
 import { Box, Flex } from "@chakra-ui/react";
 import AddContent from "./components/renderContent/contentCards/AddContent";
+import ReportIssue from "./components/ReportIssue";
+import About from "./components/About";
 
 const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 function App() {
@@ -27,6 +29,8 @@ function App() {
           </Box>
           <Routes>
             <Route path="/" element={<RenderContent user_id="" />} />
+            <Route path="/reportIssue" element={<ReportIssue />} />
+            <Route path="/about" element={<About />} />
             <Route path="/add" element={<AddContent />} />
             <Route path="/sign-in" element={<SignInPage />} />
             <Route path="/sign-up" element={<SignUpPage />} />
