@@ -31,7 +31,7 @@ const Filters = ({
   onSelectType,
 }: Props) => {
   const filterOptions = [
-    { value: "updated_at DESC", label: "Newest" },
+    { value: "", label: "Newest" },
     { value: "updated_at ASC", label: "Oldest" },
     { value: "title ASC", label: "Title A-Z" },
     { value: "title DESC", label: "Title Z-A" },

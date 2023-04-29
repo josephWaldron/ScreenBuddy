@@ -50,7 +50,11 @@ const RenderContent = ({ user_id }: Props) => {
           <div></div>
         )}
         <Filters
-          selectedFilter={"updated_at DESC"}
+          selectedFilter={
+            contentFilters.filter !== undefined
+              ? contentFilters.filter
+              : ""
+          }
           onFilter={(selectedFilter) =>
             setContentFilters({ ...contentFilters, filter: selectedFilter })
           }
@@ -61,6 +65,7 @@ const RenderContent = ({ user_id }: Props) => {
             setContentFilters({ ...contentFilters, content_type: type })
           }
         />
+
         <ContentGrid
           isLoading={contentIsLoading}
           contentArray={contentData}
