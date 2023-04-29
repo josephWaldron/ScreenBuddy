@@ -9,7 +9,7 @@ export interface contentFilters {
   user_id?: string; //if user_id is not provided get all content
   content_type?: string;
   title?: string; //if title is not provided get all content
-  filter: string;
+  filter?: string;
 }
 
 interface Props {
@@ -19,7 +19,6 @@ interface Props {
 const RenderContent = ({ user_id }: Props) => {
   const [contentFilters, setContentFilters] = useState<contentFilters>({
     user_id: user_id,
-    filter: "updated_at DESC",
   });
   const { data: userData, isLoading: userIsLoading } = getUser({ user_id });
   const userName = userData?.username;
@@ -51,7 +50,7 @@ const RenderContent = ({ user_id }: Props) => {
           <div></div>
         )}
         <Filters
-          selectedFilter={contentFilters.filter}
+          selectedFilter={"updated_at DESC"}
           onFilter={(selectedFilter) =>
             setContentFilters({ ...contentFilters, filter: selectedFilter })
           }
