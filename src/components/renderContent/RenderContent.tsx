@@ -14,6 +14,7 @@ import getUser from "../../hooks/getHooks/getUserName";
 import ContentGrid from "./ContentGrid";
 import Filters from "./Filters";
 import { MdLogin } from "react-icons/md";
+import { useUser } from "@clerk/clerk-react";
 export interface contentFilters {
   user_id?: string; //if user_id is not provided get all content
   content_type?: string;
@@ -32,6 +33,7 @@ const RenderContent = ({ user_id }: Props) => {
   const handleSignIn = () => {
     location.href = "/sign-up";
   };
+  const { user } = useUser();
   const { data: userData, isLoading: userIsLoading } = getUser({ user_id });
   const userName = userData?.username;
   const { data: contentData, isLoading: contentIsLoading } =
@@ -53,7 +55,7 @@ const RenderContent = ({ user_id }: Props) => {
           <Center>
             <VStack>
               <Text fontSize={"3xl"}>Our User's Database</Text>
-              {!userName && (
+              {!user && (
                 <Text fontSize={"xl"}>
                   Please{" "}
                   <Button
