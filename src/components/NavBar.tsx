@@ -34,7 +34,7 @@ const NavBar = () => {
         <Box width={50}> </Box>
         <Spacer />
         <a href="/">
-          <Text fontSize={"3xl"}>ScreenBuddy BETA</Text>
+          <Text fontSize={"2xl"}>ScreenBuddy BETA</Text>
         </a>
         <Spacer />
         <Box width={100}></Box>
