@@ -12,7 +12,6 @@ import {
   Text,
   Center,
   Spinner,
-  useToast,
 } from "@chakra-ui/react";
 import { Content } from "../../ContentGrid";
 import { useUser } from "@clerk/clerk-react";
@@ -36,8 +35,6 @@ const DeleteContentModal = ({
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const toast = useToast();
-
   const handleSubmission = async (content: Content) => {
     if (user) {
       setIsLoading(true);
@@ -47,14 +44,6 @@ const DeleteContentModal = ({
           content_id: content.id,
         });
         setIsLoading(false);
-        toast({
-          title: "Rating deleted!",
-          description: `${content.title}'s rating has been deleted.`,
-          status: "error",
-          duration: 5000,
-          isClosable: true,
-          position: "top",
-        });
         onRatingDeleted();
         onClose();
       } catch (error) {
