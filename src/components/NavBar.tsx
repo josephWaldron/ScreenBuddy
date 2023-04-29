@@ -21,7 +21,6 @@ import { MdPerson, MdLogin, MdMenu } from "react-icons/md";
 const NavBar = () => {
   const logo = useColorModeValue(lightModeLogo, darkModeLogo);
   const { user, isLoaded } = useUser();
-  const isSmallerThanMd = useBreakpointValue({ base: true, sm: false });
 
   const handleProfile = () => {
     location.href = `/profile`;
@@ -55,6 +54,9 @@ const NavBar = () => {
         />
         <MenuList>
           <MenuItem as="a" href="/">
+            Home
+          </MenuItem>
+          <MenuItem as="a" href="/">
             About
           </MenuItem>
           <MenuItem as="a" href="/">
@@ -67,14 +69,12 @@ const NavBar = () => {
         <Image src={logo} width={50} marginLeft={10} />
       </a>
       <Spacer />
-      {!isSmallerThanMd && (
-        <>
-          <a href="/">
-            <Text fontSize={"3xl"}>ScreenBuddy BETA</Text>
-          </a>
-          <Spacer />
-        </>
-      )}
+
+      <a href="/">
+        <Text fontSize={"2xl"}>ScreenBuddy BETA</Text>
+      </a>
+      <Spacer />
+
       {user && (
         <Button
           width={100}
