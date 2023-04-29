@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from "react";
 import getContent from "../../hooks/getHooks/getContent";
-import { Box, HStack, Spacer, VStack, Text, Center } from "@chakra-ui/react";
+import {
+  Box,
+  HStack,
+  Spacer,
+  VStack,
+  Text,
+  Center,
+  Spinner,
+} from "@chakra-ui/react";
 import Footer from "./Footer";
 import getUser from "../../hooks/getHooks/getUserName";
 import ContentGrid from "./ContentGrid";
@@ -25,18 +33,17 @@ const RenderContent = ({ user_id }: Props) => {
   const userName = userData?.username;
   const { data: contentData, isLoading: contentIsLoading } =
     getContent(contentFilters);
-  console.log(contentData);
   if (userIsLoading)
     return (
       <Center>
-        <Text fontSize={"4xl"}>Loading...</Text>
+        <Spinner />
       </Center>
     );
   if (!contentData && !contentIsLoading)
     return (
       <Box flex="1">
         <Center>
-          <Text fontSize={"4xl"}>No Content Found</Text>
+          <Text fontSize={"4xl"}>No Content Found for user: {userName}</Text>
         </Center>
         <Footer user_id={user_id} />
       </Box>

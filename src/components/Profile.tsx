@@ -9,6 +9,7 @@ import {
   Flex,
   HStack,
   Spacer,
+  Spinner,
   Text,
 } from "@chakra-ui/react";
 import { useClerk, useUser } from "@clerk/clerk-react";
@@ -30,7 +31,7 @@ const Profile = (props: Props) => {
   if (!isLoaded)
     return (
       <Center>
-        <Text fontSize="3xl">Loading...</Text>
+        <Spinner />
       </Center>
     );
 

@@ -48,7 +48,7 @@ const ContentGrid = ({ isLoading, contentArray, user_id }: Props) => {
       >
         {contentArray.map((content) => (
           <CardContainer key={content.id}>
-            <ContentCard content={content} />
+            <ContentCard content={content} user_id={user_id} />
           </CardContainer>
         ))}
       </SimpleGrid>
