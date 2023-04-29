@@ -1,10 +1,19 @@
 import { useState } from "react";
 import getContent from "../../hooks/getHooks/getContent";
-import { Box, Text, Center, Spinner } from "@chakra-ui/react";
+import {
+  Box,
+  Text,
+  Center,
+  Spinner,
+  HStack,
+  VStack,
+  Button,
+} from "@chakra-ui/react";
 import Footer from "./Footer";
 import getUser from "../../hooks/getHooks/getUserName";
 import ContentGrid from "./ContentGrid";
 import Filters from "./Filters";
+import { MdLogin } from "react-icons/md";
 export interface contentFilters {
   user_id?: string; //if user_id is not provided get all content
   content_type?: string;
@@ -20,6 +29,9 @@ const RenderContent = ({ user_id }: Props) => {
   const [contentFilters, setContentFilters] = useState<contentFilters>({
     user_id: user_id,
   });
+  const handleSignIn = () => {
+    location.href = "/sign-up";
+  };
   const { data: userData, isLoading: userIsLoading } = getUser({ user_id });
   const userName = userData?.username;
   const { data: contentData, isLoading: contentIsLoading } =
@@ -30,15 +42,6 @@ const RenderContent = ({ user_id }: Props) => {
         <Spinner />
       </Center>
     );
-  if (!contentData && !contentIsLoading)
-    return (
-      <Box flex="1">
-        <Center>
-          <Text fontSize={"4xl"}>No Content Found for user: {userName}</Text>
-        </Center>
-        <Footer user_id={user_id} />
-      </Box>
-    );
   return (
     <>
       <Box flex="1">
@@ -48,7 +51,23 @@ const RenderContent = ({ user_id }: Props) => {
           </Center>
         ) : (
           <Center>
-            <Text fontSize={"3xl"}>Our User's Database</Text>
+            <VStack>
+              <Text fontSize={"3xl"}>Our User's Database</Text>
+              {!userName && (
+                <Text fontSize={"xl"}>
+                  Please{" "}
+                  <Button
+                    width={100}
+                    rightIcon={<MdLogin />}
+                    colorScheme="blue"
+                    onClick={handleSignIn}
+                  >
+                    Sign In
+                  </Button>{" "}
+                  for the Full Experience!
+                </Text>
+              )}
+            </VStack>
           </Center>
         )}
         <Filters
