@@ -56,7 +56,7 @@ const NavBar = () => {
             Home
           </MenuItem>
           <MenuItem as="a" href="/about">
-            About / Contact
+            About
           </MenuItem>
           <MenuItem as="a" href="/reportIssue">
             Report Issue
