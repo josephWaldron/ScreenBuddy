@@ -14,13 +14,13 @@ import {
   Tooltip,
   PopoverArrow,
 } from "@chakra-ui/react";
-import { MdDelete, MdEdit } from "react-icons/md";
-import { GrAdd } from "react-icons/gr";
+
 import { useUser } from "@clerk/clerk-react";
 import { useEffect, useState } from "react";
 import AddContentModal from "./CRUD/AddContentModal";
 import EditContentModal from "./CRUD/EditContentModal";
 import { AddIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import DeleteContentModal from "./CRUD/DeleteContentModal";
 
 interface Props {
   content: Content;
@@ -46,6 +46,14 @@ const ContentCard = ({ content, user_id }: Props) => {
   const closeEditContentModal = () => {
     setIsEditContentModalOpen(false);
   };
+  const [isDeleteContentModalOpen, setIsDeleteContentModalOpen] =
+    useState(false);
+  const openDeleteContentModal = () => {
+    setIsDeleteContentModalOpen(true);
+  };
+  const closeDeleteContentModal = () => {
+    setIsDeleteContentModalOpen(false);
+  };
 
   useEffect(() => {
     if (user) {
@@ -67,6 +75,14 @@ const ContentCard = ({ content, user_id }: Props) => {
         content={content}
         onRatingUpdated={(newRating) => {
           content.rating = newRating;
+        }}
+      />
+      <DeleteContentModal
+        isOpen={isDeleteContentModalOpen}
+        onClose={closeDeleteContentModal}
+        content={content}
+        onRatingDeleted={() => {
+          window.location.reload();
         }}
       />
 
@@ -179,6 +195,7 @@ const ContentCard = ({ content, user_id }: Props) => {
                   width="100%"
                   size={"sm"}
                   isDisabled={!canEditDelete}
+                  onClick={openDeleteContentModal}
                 >
                   Delete
                 </Button>
