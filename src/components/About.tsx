@@ -143,7 +143,12 @@ const About = () => {
       role: "Backend",
     },
   ];
-  const StackComponent = useBreakpointValue({ base: VStack, md: HStack });
+  const isHorizontal = useBreakpointValue({ base: false, md: true });
+
+  // Create a custom Stack component
+  const CustomStack = (props: any) => {
+    return isHorizontal ? <HStack {...props} /> : <VStack {...props} />;
+  };
 
   return (
     <VStack padding={10}>
@@ -163,11 +168,11 @@ const About = () => {
       <br />
       <Box p={6} borderWidth="1px" borderRadius="lg">
         <Heading mb={6}>About the Developers</Heading>
-        <StackComponent spacing={10}>
+        <CustomStack spacing={10}>
           {developers.map((dev, index) => (
             <DeveloperCard key={index} {...dev} />
           ))}
-        </StackComponent>
+        </CustomStack>
       </Box>
 
       <Box p={6} borderWidth="1px" borderRadius="lg" width={400}>
