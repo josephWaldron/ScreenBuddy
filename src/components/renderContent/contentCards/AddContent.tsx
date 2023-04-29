@@ -36,7 +36,7 @@ const AddContent = () => {
                 borderRadius={20}
                 placeholder="Search ..."
                 variant="filled"
-                width={500}
+                width={350}
               ></Input>
             </InputGroup>
           </form>
@@ -68,7 +68,7 @@ const AddContent = () => {
                 borderRadius={20}
                 placeholder="Search ..."
                 variant="filled"
-                width={500}
+                width={350}
                 onChange={() => {
                   if (ref.current) {
                     setChangeCount((prevCount) => prevCount + 1);
