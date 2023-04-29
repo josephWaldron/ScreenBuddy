@@ -1,14 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import getContent from "../../hooks/getHooks/getContent";
-import {
-  Box,
-  HStack,
-  Spacer,
-  VStack,
-  Text,
-  Center,
-  Spinner,
-} from "@chakra-ui/react";
+import { Box, Text, Center, Spinner } from "@chakra-ui/react";
 import Footer from "./Footer";
 import getUser from "../../hooks/getHooks/getUserName";
 import ContentGrid from "./ContentGrid";

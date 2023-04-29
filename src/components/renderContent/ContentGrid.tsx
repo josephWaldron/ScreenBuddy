@@ -1,7 +1,4 @@
-import React from "react";
-import { contentFilters } from "./RenderContent";
-import getContent from "../../hooks/getHooks/getContent";
-import { Box, Center, Grid, SimpleGrid, Text } from "@chakra-ui/react";
+import { Box, SimpleGrid } from "@chakra-ui/react";
 import CardSkeleton from "./contentCards/CardSkeleton";
 import CardContainer from "./contentCards/CardContainer";
 import ContentCard from "./contentCards/ContentCard";

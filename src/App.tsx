@@ -4,12 +4,11 @@ import getAllUserIds from "./hooks/getHooks/getAllUserIds";
 import { Route, Routes } from "react-router-dom";
 import SignInPage from "./components/SignInPage";
 import { dark } from "@clerk/themes";
-
 import Profile from "./components/Profile";
 import RenderContent from "./components/renderContent/RenderContent";
 import SignUpPage from "./components/SignUpPage";
 import { Box, Flex } from "@chakra-ui/react";
-import Footer from "./components/renderContent/Footer";
+import AddContent from "./components/renderContent/contentCards/AddContent";
 
 const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 function App() {
@@ -28,10 +27,10 @@ function App() {
           </Box>
           <Routes>
             <Route path="/" element={<RenderContent user_id="" />} />
+            <Route path="/add" element={<AddContent />} />
             <Route path="/sign-in" element={<SignInPage />} />
             <Route path="/sign-up" element={<SignUpPage />} />
             <Route path="/profile" element={<Profile users={users.data} />} />
-
             {!users.isLoading &&
               users.data.map((userIdMap: string) => (
                 <Route

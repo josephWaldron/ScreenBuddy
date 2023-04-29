@@ -14,7 +14,7 @@ import {
   Tab,
   TabList,
 } from "@chakra-ui/react";
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { BsChevronDown, BsSearch } from "react-icons/bs";
 
 interface Props {
@@ -68,7 +68,10 @@ const Filters = ({
               placeholder="Search ..."
               variant="filled"
               width={250}
-            ></Input>
+              onChange={() => {
+                if (ref.current) onSearch(ref.current.value);
+              }}
+            />
           </InputGroup>
         </form>
         <Spacer />

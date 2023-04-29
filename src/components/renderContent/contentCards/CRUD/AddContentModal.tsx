@@ -61,6 +61,7 @@ const AddContentModal = ({ isOpen, onClose, content }: Props) => {
         onMouseLeave={handleMouseLeave}
         color={isFilled ? "gold" : "gray.400"}
         fontSize="2em"
+        cursor="pointer" // Add this line
       >
         {isFilled ? <BsStarFill /> : <BsStar />}
       </Box>
