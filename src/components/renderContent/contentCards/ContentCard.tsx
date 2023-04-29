@@ -92,7 +92,7 @@ const ContentCard = ({ content, user_id }: Props) => {
               </Heading>
               <Flex flexGrow={1} />
               <Box mb={3} textAlign="center">
-                {content.rating} / 10 🍿
+                {content.rating.toFixed(2)} / 10 🍿
               </Box>
             </Flex>
           </Card>

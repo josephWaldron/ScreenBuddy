@@ -19,7 +19,15 @@ import {
   FormControl,
   Input,
   FormLabel,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
+  IconButton,
 } from "@chakra-ui/react";
+import { ChevronUpIcon, ChevronDownIcon } from "@chakra-ui/icons";
+
 import { Content } from "../../ContentGrid";
 import { useUser } from "@clerk/clerk-react";
 import addUserRating from "../../../../hooks/postHooks/addUserRating";
@@ -31,8 +39,7 @@ interface Props {
 }
 
 const AddContentModal = ({ isOpen, onClose, content }: Props) => {
-  const [rating, setRating] = useState<number | null>(null);
-  const [hover, setHover] = useState<number | null>(null);
+  const [rating, setRating] = useState<number>(0);
   const { user } = useUser();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -54,9 +61,9 @@ const AddContentModal = ({ isOpen, onClose, content }: Props) => {
           user_rating: user_rating,
         });
         setIsLoading(false);
-        console.log("User rating added successfully", res);
         toast({
-          title: "Rating added",
+          title: "Rating added to your list!",
+          description: `${content.title} has been added to your list with a rating of ${user_rating} / 10 🍿`,
           status: "success",
           duration: 5000,
           isClosable: true,
@@ -73,9 +80,9 @@ const AddContentModal = ({ isOpen, onClose, content }: Props) => {
   const handleRatingChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(event.target.value);
     if (!isNaN(value) && value >= 0 && value <= 10) {
-      setRating(value);
+      setRating(parseFloat(value.toFixed(2))); // Round to 2 decimal places before setting state
     } else {
-      setRating(null);
+      setRating(0);
     }
   };
 
@@ -95,21 +102,21 @@ const AddContentModal = ({ isOpen, onClose, content }: Props) => {
           />
           <Center>
             <Text fontSize="xl" fontWeight="bold">
-              Your Rating {rating}/ 10 🍿
+              Your Rating {rating} / 10 🍿
             </Text>
           </Center>
           <Flex justifyContent="center" alignItems="center" marginBottom={4}>
             <FormControl>
-              <FormLabel htmlFor="rating">Enter a rating (0-10) 🍿</FormLabel>
               <Input
                 type="number"
                 id="rating"
                 name="rating"
-                step="0.1"
+                step="0.01" // Change this line
                 min="0"
                 max="10"
-                value={rating ?? ""}
+                value={rating ? rating : ""}
                 onChange={handleRatingChange}
+                placeholder="Enter a rating (0-10) 🍿"
               />
             </FormControl>
           </Flex>

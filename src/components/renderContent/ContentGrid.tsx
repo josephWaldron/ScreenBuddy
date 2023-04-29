@@ -1,7 +1,8 @@
-import { Box, SimpleGrid } from "@chakra-ui/react";
+import { Box, SimpleGrid, Center, Text, Tooltip } from "@chakra-ui/react";
 import CardSkeleton from "./contentCards/CardSkeleton";
 import CardContainer from "./contentCards/CardContainer";
 import ContentCard from "./contentCards/ContentCard";
+import { QuestionOutlineIcon } from "@chakra-ui/icons";
 
 export interface Content {
   id: number;
@@ -39,6 +40,14 @@ const ContentGrid = ({ isLoading, contentArray, user_id }: Props) => {
 
   return (
     <>
+      <Center>
+        <Text fontSize="2xl" fontWeight="bold" color="white">
+          Click on a card to add it to your list!
+        </Text>
+        <Tooltip label="If you cant find it here click the Add Content button.">
+          <QuestionOutlineIcon color="white" marginLeft={2} />
+        </Tooltip>
+      </Center>
       <SimpleGrid
         columns={{ base: 2, sm: 2, md: 3, lg: 4, xl: 6, "2xl": 10 }}
         spacing={2}
