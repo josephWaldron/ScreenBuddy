@@ -8,7 +8,7 @@ import Profile from "./components/Profile";
 import RenderContent from "./components/renderContent/RenderContent";
 import SignUpPage from "./components/SignUpPage";
 import { Box, Flex } from "@chakra-ui/react";
-import AddContent from "./components/renderContent/contentCards/AddContent";
+import AddContent from "./components/renderContent/AddContent";
 import ReportIssue from "./components/ReportIssue";
 import About from "./components/About";
 

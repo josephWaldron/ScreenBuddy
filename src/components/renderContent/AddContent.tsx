@@ -8,9 +8,9 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useRef, useState } from "react";
-import ContentGrid from "../ContentGrid";
+import ContentGrid from "./ContentGrid";
 import { BsSearch } from "react-icons/bs";
-import useTMDBSearch from "../../../hooks/getHooks/useTMDBSearch ";
+import useTMDBSearch from "../../hooks/getHooks/useTMDBSearch ";
 
 const AddContent = () => {
   const [searchText, setSearchText] = useState("");
