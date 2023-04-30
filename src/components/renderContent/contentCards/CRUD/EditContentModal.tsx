@@ -63,7 +63,7 @@ const EditContentModal = ({
           title: "Rating edited!",
           description: `${content.title}'s rating is now ${user_rating} / 10 🍿`,
           status: "warning",
-          duration: 5000,
+          duration: 3000,
           isClosable: true,
           position: "bottom",
         });

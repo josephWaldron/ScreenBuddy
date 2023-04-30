@@ -55,7 +55,7 @@ const AddContentModal = ({ isOpen, onClose, content }: Props) => {
           title: "Rating added to your list!",
           description: `${content.title} has been added to your list.`,
           status: "success",
-          duration: 5000,
+          duration: 3000,
           isClosable: true,
           position: "bottom",
         });
