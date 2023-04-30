@@ -71,7 +71,7 @@ const AddContent = () => {
                 onChange={() => {
                   if (ref.current) {
                     setChangeCount((prevCount) => prevCount + 1);
-                    if (changeCount >= 1) {
+                    if (changeCount > 1) {
                       setSearchText(ref.current.value);
                       setChangeCount(0);
                     }

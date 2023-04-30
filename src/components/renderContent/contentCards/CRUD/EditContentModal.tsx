@@ -65,7 +65,7 @@ const EditContentModal = ({
           status: "warning",
           duration: 5000,
           isClosable: true,
-          position: "top",
+          position: "bottom",
         });
         onRatingUpdated(rating); // Pass the new rating
         onClose();
