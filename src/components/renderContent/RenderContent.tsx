@@ -1,20 +1,12 @@
-import { useState } from "react";
-import getContent from "../../hooks/getHooks/getContent";
-import {
-  Box,
-  Text,
-  Center,
-  Spinner,
-  HStack,
-  VStack,
-  Button,
-} from "@chakra-ui/react";
-import Footer from "./Footer";
-import getUser from "../../hooks/getHooks/getUserName";
-import ContentGrid from "./ContentGrid";
-import Filters from "./Filters";
-import { MdLogin } from "react-icons/md";
-import { useUser } from "@clerk/clerk-react";
+import { useState } from 'react';
+import getContent from '../../hooks/getHooks/getContent';
+import { Box, Text, Center, Spinner, HStack, VStack, Button } from '@chakra-ui/react';
+import Footer from './Footer';
+import getUser from '../../hooks/getHooks/getUserName';
+import ContentGrid from './ContentGrid';
+import Filters from './Filters';
+import { MdLogin } from 'react-icons/md';
+import { useUser } from '@clerk/clerk-react';
 export interface contentFilters {
   user_id?: string; //if user_id is not provided get all content
   content_type?: string;
@@ -31,13 +23,12 @@ const RenderContent = ({ user_id }: Props) => {
     user_id: user_id,
   });
   const handleSignIn = () => {
-    location.href = "/sign-up";
+    location.href = '/sign-up';
   };
   const { user } = useUser();
   const { data: userData, isLoading: userIsLoading } = getUser({ user_id });
   const userName = userData?.username;
-  const { data: contentData, isLoading: contentIsLoading } =
-    getContent(contentFilters);
+  const { data: contentData, isLoading: contentIsLoading } = getContent(contentFilters);
   if (userIsLoading)
     return (
       <Center>
@@ -49,15 +40,15 @@ const RenderContent = ({ user_id }: Props) => {
       <Box flex="1">
         {userName ? (
           <Center>
-            <Text fontSize={"3xl"}>{userName}'s Profile</Text>
+            <Text fontSize={'3xl'}>{userName}'s Profile</Text>
           </Center>
         ) : (
           <Center>
             <VStack>
-              <Text fontSize={"3xl"}>Our User's Database</Text>
+              <Text fontSize={'3xl'}>Our Users' Database</Text>
               {!user && (
-                <Text fontSize={"xl"}>
-                  Please{" "}
+                <Text fontSize={'xl'}>
+                  Please{' '}
                   <Button
                     width={100}
                     rightIcon={<MdLogin />}
@@ -65,7 +56,7 @@ const RenderContent = ({ user_id }: Props) => {
                     onClick={handleSignIn}
                   >
                     Sign In
-                  </Button>{" "}
+                  </Button>{' '}
                   for the Full Experience!
                 </Text>
               )}
@@ -73,25 +64,17 @@ const RenderContent = ({ user_id }: Props) => {
           </Center>
         )}
         <Filters
-          selectedFilter={
-            contentFilters.filter !== undefined ? contentFilters.filter : ""
-          }
+          selectedFilter={contentFilters.filter !== undefined ? contentFilters.filter : ''}
           onFilter={(selectedFilter) =>
             setContentFilters({ ...contentFilters, filter: selectedFilter })
           }
           onSearch={(searchText) => {
             setContentFilters({ ...contentFilters, title: searchText });
           }}
-          onSelectType={(type) =>
-            setContentFilters({ ...contentFilters, content_type: type })
-          }
+          onSelectType={(type) => setContentFilters({ ...contentFilters, content_type: type })}
         />
 
-        <ContentGrid
-          isLoading={contentIsLoading}
-          contentArray={contentData}
-          user_id={user_id}
-        />
+        <ContentGrid isLoading={contentIsLoading} contentArray={contentData} user_id={user_id} />
       </Box>
       <Footer user_id={user_id} />
     </>
