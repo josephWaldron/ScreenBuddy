@@ -53,11 +53,11 @@ const AddContentModal = ({ isOpen, onClose, content }: Props) => {
         setIsLoading(false);
         toast({
           title: "Rating added to your list!",
-          description: `${content.title} has been added to your list with a rating of ${user_rating} / 10 🍿`,
+          description: `${content.title} has been added to your list.`,
           status: "success",
           duration: 5000,
           isClosable: true,
-          position: "top",
+          position: "bottom",
         });
         onClose();
       } catch (error) {
