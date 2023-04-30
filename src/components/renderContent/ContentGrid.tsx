@@ -24,7 +24,6 @@ interface Props {
   isLoading?: boolean;
   contentArray: Content[];
   user_id?: string;
-  
 }
 const handleAdd = () => {
   location.href = "/add";
@@ -53,7 +52,7 @@ const ContentGrid = ({ isLoading, contentArray, user_id }: Props) => {
     return (
       <VStack>
         <Text fontSize="2xl" fontWeight="bold" color="white">
-          No results found.
+          No results found to add content click here
         </Text>
         <Button
           rightIcon={<AddIcon />}
