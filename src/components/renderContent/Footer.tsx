@@ -17,9 +17,9 @@ const Footer = ({ user_id }: Props) => {
       toast({
         title: "Home Page Link Copied!",
         description: "Share it with your friends!",
-        duration: 3000,
+        duration: 2000,
         isClosable: false,
-        position: "top",
+        position: "bottom",
       });
     } else {
       const url = `${location.origin}/${user_id}`;
@@ -28,9 +28,9 @@ const Footer = ({ user_id }: Props) => {
       toast({
         title: "Profile Link Copied!",
         description: "Share it with your friends!",
-        duration: 3000,
+        duration: 2000,
         isClosable: false,
-        position: "top",
+        position: "bottom",
       });
     }
   };

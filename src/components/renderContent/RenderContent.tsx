@@ -5,9 +5,10 @@ import {
   Text,
   Center,
   Spinner,
-  HStack,
   VStack,
   Button,
+  useToast,
+  Tooltip,
 } from "@chakra-ui/react";
 import Footer from "./Footer";
 import getUser from "../../hooks/getHooks/getUserName";
@@ -15,6 +16,7 @@ import ContentGrid from "./ContentGrid";
 import Filters from "./Filters";
 import { MdLogin } from "react-icons/md";
 import { useUser } from "@clerk/clerk-react";
+import { CopyIcon } from "@chakra-ui/icons";
 export interface contentFilters {
   user_id?: string; //if user_id is not provided get all content
   content_type?: string;
@@ -38,6 +40,21 @@ const RenderContent = ({ user_id }: Props) => {
   const userName = userData?.username;
   const { data: contentData, isLoading: contentIsLoading } =
     getContent(contentFilters);
+  const toast = useToast();
+
+  const handleShare = () => {
+    const url = `${location.origin}/${user_id}`;
+    navigator.clipboard.writeText(url);
+
+    toast({
+      title: "Profile Link Copied!",
+      description: "Share it with your friends!",
+      duration: 2000,
+      isClosable: false,
+      position: "bottom",
+    });
+  };
+
   if (!isLoaded)
     return (
       <Center>
@@ -49,7 +66,18 @@ const RenderContent = ({ user_id }: Props) => {
       <Box flex="1">
         {userName ? (
           <Center>
-            <Text fontSize={"3xl"}>{userName}'s Profile</Text>
+            <Text padding={5} fontSize={"3xl"}>
+              {userName}'s Profile
+            </Text>
+            <Tooltip label="Copy link to clipboard">
+              <Button
+                leftIcon={<CopyIcon />}
+                colorScheme={"blue"} // change color scheme based on state
+                onClick={handleShare}
+              >
+                Share
+              </Button>
+            </Tooltip>
           </Center>
         ) : (
           <Center>
@@ -100,3 +128,12 @@ const RenderContent = ({ user_id }: Props) => {
 };
 
 export default RenderContent;
+function toast(arg0: {
+  title: string;
+  description: string;
+  duration: number;
+  isClosable: boolean;
+  position: string;
+}) {
+  throw new Error("Function not implemented.");
+}
