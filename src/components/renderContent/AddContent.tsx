@@ -20,7 +20,7 @@ const AddContent = () => {
 
   const handleInputChange = debounce((value) => {
     setSearchText(value);
-  }, 250);
+  }, 200);
 
   useEffect(() => {
     const searchQuery = localStorage.getItem("searchQuery");
