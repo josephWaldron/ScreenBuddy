@@ -33,12 +33,12 @@ const RenderContent = ({ user_id }: Props) => {
   const handleSignIn = () => {
     location.href = "/sign-up";
   };
-  const { user } = useUser();
+  const { user, isLoaded } = useUser();
   const { data: userData, isLoading: userIsLoading } = getUser({ user_id });
   const userName = userData?.username;
   const { data: contentData, isLoading: contentIsLoading } =
     getContent(contentFilters);
-  if (userIsLoading)
+  if (!isLoaded)
     return (
       <Center>
         <Spinner />
@@ -55,7 +55,7 @@ const RenderContent = ({ user_id }: Props) => {
           <Center>
             <VStack>
               <Text fontSize={"3xl"}>Our Users' Database</Text>
-              {!user && (
+              {!user && isLoaded && (
                 <Text fontSize={"xl"}>
                   Please{" "}
                   <Button

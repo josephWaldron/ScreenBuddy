@@ -60,7 +60,7 @@ const ContentGrid = ({
     return (
       <VStack>
         <Text fontSize="2xl" fontWeight="bold" color="white">
-          No results found to add content click here
+          Can't find what you're looking for? Try Advanced Search!
         </Text>
         <Button
           rightIcon={<SearchIcon />}
