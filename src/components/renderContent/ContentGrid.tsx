@@ -10,7 +10,7 @@ import {
 import CardSkeleton from "./contentCards/CardSkeleton";
 import CardContainer from "./contentCards/CardContainer";
 import ContentCard from "./contentCards/ContentCard";
-import { AddIcon, QuestionOutlineIcon } from "@chakra-ui/icons";
+import { AddIcon, QuestionOutlineIcon, SearchIcon } from "@chakra-ui/icons";
 
 export interface Content {
   id: number;
@@ -24,15 +24,23 @@ interface Props {
   isLoading?: boolean;
   contentArray: Content[];
   user_id?: string;
+  searchQuery?: string;
 }
-const handleAdd = () => {
-  location.href = "/add";
-};
 
-const ContentGrid = ({ isLoading, contentArray, user_id }: Props) => {
+const ContentGrid = ({
+  isLoading,
+  contentArray,
+  user_id,
+  searchQuery,
+}: Props) => {
   const skeletons = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
   ];
+  const handleAdd = () => {
+    //save the search query state to local storage
+    localStorage.setItem("searchQuery", searchQuery || "");
+    location.href = "/add";
+  };
   if (!contentArray && isLoading)
     return (
       <SimpleGrid
@@ -55,12 +63,12 @@ const ContentGrid = ({ isLoading, contentArray, user_id }: Props) => {
           No results found to add content click here
         </Text>
         <Button
-          rightIcon={<AddIcon />}
+          rightIcon={<SearchIcon />}
           size={"lg"}
-          colorScheme="green"
+          colorScheme="blue"
           onClick={handleAdd}
         >
-          Add Content
+          Advanced Search
         </Button>
       </VStack>
     );

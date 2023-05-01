@@ -16,6 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { useRef } from "react";
 import { BsChevronDown, BsSearch } from "react-icons/bs";
+import { debounce } from "lodash";
 
 interface Props {
   onSearch: (searchText: string) => void;
@@ -38,6 +39,9 @@ const Filters = ({
     { value: "rating ASC", label: "Rating Low-High" },
     { value: "rating DESC", label: "Rating High-Low" },
   ];
+  const handleInputChange = debounce((value) => {
+    onSearch(value);
+  }, 200);
 
   const currentSelectedFilter = filterOptions.find(
     (option) => option.value === selectedFilter
@@ -69,7 +73,9 @@ const Filters = ({
               variant="filled"
               width={250}
               onChange={() => {
-                if (ref.current) onSearch(ref.current.value);
+                if (ref.current) {
+                  handleInputChange(ref.current.value);
+                }
               }}
             />
           </InputGroup>

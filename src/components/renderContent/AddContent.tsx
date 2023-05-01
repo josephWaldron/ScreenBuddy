@@ -7,16 +7,29 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ContentGrid from "./ContentGrid";
 import { BsSearch } from "react-icons/bs";
 import useTMDBSearch from "../../hooks/getHooks/useTMDBSearch ";
+import { debounce } from "lodash";
 
 const AddContent = () => {
   const [searchText, setSearchText] = useState("");
   const ref = useRef<HTMLInputElement>(null);
   const { results, isLoading } = useTMDBSearch(searchText);
-  const [changeCount, setChangeCount] = useState(0); //to rate limit kinda
+
+  const handleInputChange = debounce((value) => {
+    setSearchText(value);
+  }, 250);
+
+  useEffect(() => {
+    const searchQuery = localStorage.getItem("searchQuery");
+    if (searchQuery) {
+      setSearchText(searchQuery);
+      localStorage.removeItem("searchQuery");
+      console.log("searchQuery", searchQuery);
+    }
+  }, []);
 
   if (!results && !isLoading)
     return (
@@ -70,11 +83,7 @@ const AddContent = () => {
                 width={350}
                 onChange={() => {
                   if (ref.current) {
-                    setChangeCount((prevCount) => prevCount + 1);
-                    if (changeCount > 1) {
-                      setSearchText(ref.current.value);
-                      setChangeCount(0);
-                    }
+                    handleInputChange(ref.current.value);
                   }
                 }}
               />
