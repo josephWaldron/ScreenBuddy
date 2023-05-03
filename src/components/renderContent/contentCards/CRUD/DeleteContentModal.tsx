@@ -48,7 +48,6 @@ const DeleteContentModal = ({
         onClose();
       } catch (error) {
         setIsLoading(false);
-        console.error(error);
       }
     }
   };
