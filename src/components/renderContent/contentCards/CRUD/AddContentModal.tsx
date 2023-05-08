@@ -70,7 +70,7 @@ const AddContentModal = ({ isOpen, onClose, content }: Props) => {
   const handleRatingChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseFloat(event.target.value);
     if (!isNaN(value) && value >= 0 && value <= 10) {
-      setRating(parseFloat(value.toFixed(2))); // Round to 2 decimal places before setting state
+      setRating(parseFloat(value.toFixed(2)));
     } else {
       setRating(0);
     }
@@ -104,7 +104,7 @@ const AddContentModal = ({ isOpen, onClose, content }: Props) => {
                 step="0.01" // Change this line
                 min="0"
                 max="10"
-                value={rating ? rating : ""}
+                // value={rating ? rating : ""}
                 onChange={handleRatingChange}
                 placeholder="Enter a rating (0-10) 🍿"
               />
@@ -116,7 +116,7 @@ const AddContentModal = ({ isOpen, onClose, content }: Props) => {
             label={
               rating
                 ? "Add to Your List"
-                : "Please select a rating before adding to your list"
+                : "Please select a rating and make sure it is within the range of 0-10"
             }
             placement="top"
           >
