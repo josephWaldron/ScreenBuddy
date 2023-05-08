@@ -118,7 +118,7 @@ const EditContentModal = ({
                 step="0.01" // Change this line
                 min="0"
                 max="10"
-                value={rating ? rating : ""}
+                // value={rating ? rating : ""}
                 onChange={handleRatingChange}
                 placeholder="Enter a rating (0-10) 🍿"
               />
